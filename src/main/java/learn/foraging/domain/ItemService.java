@@ -46,6 +46,11 @@ public class ItemService {
             result.addErrorMessage("$/Kg must be between 0.00 and 7500.00.");
         }
 
+        if ((item.getCategory().equals(Category.POISONOUS) || item.getCategory().equals(Category.INEDIBLE))
+            && item.getDollarPerKilogram().compareTo(BigDecimal.ZERO) > 0) {
+            result.addErrorMessage("$/Kg must be $0 for poisonous and inedible items.");
+        }
+
         if (!result.isSuccess()) {
             return result;
         }
@@ -55,3 +60,5 @@ public class ItemService {
         return result;
     }
 }
+
+

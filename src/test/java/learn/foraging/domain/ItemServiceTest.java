@@ -63,6 +63,22 @@ class ItemServiceTest {
     }
 
     @Test
+    void shouldNotAddCostToPoisonousItem() {
+        Item arg = new Item(0, "Test Item", Category.POISONOUS, new BigDecimal("5.00"));
+        Result<Item> expected = makeResult("$/Kg must be $0 for poisonous and inedible items.", null);
+        Result<Item> actual = service.add(arg);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldNotAddCostToInedibleItem() {
+        Item arg = new Item(0, "Test Item", Category.INEDIBLE, new BigDecimal("15.00"));
+        Result<Item> expected = makeResult("$/Kg must be $0 for poisonous and inedible items.", null);
+        Result<Item> actual = service.add(arg);
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void shouldNotAddTooLargeDollars() {
         Item arg = new Item(0, "Test Item", Category.EDIBLE, new BigDecimal("9999.00"));
         Result<Item> expected = makeResult("$/Kg must be between 0.00 and 7500.00.", null);
