@@ -62,4 +62,18 @@ class ItemJdbcClientRepositoryTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    void shouldFindByName() {
+        Item expected = EDIBLE;
+        Item actual = repository.findByName("Edible").orElse(null);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldNotFindByName() {
+        Item expected = null;
+        Item actual = repository.findByName("Parsely").orElse(null);
+        assertEquals(expected, actual);
+    }
+
 }

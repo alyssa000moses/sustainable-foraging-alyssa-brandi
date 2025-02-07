@@ -31,11 +31,24 @@ public class ItemService {
             result.addErrorMessage("Item name is required.");
         }
 
+        if (repository.findByName(item.getName()).isPresent()) {
+            result.addErrorMessage("Item name must be unique.");
+        }
+
+        if (item.getCategory() == null || item.getCategory().toString().isBlank()) {
+            result.addErrorMessage("Item category is required.");
+        }
+
         if (item.getDollarPerKilogram() == null) {
             result.addErrorMessage("$/Kg is required.");
         } else if (item.getDollarPerKilogram().compareTo(BigDecimal.ZERO) < 0
                 || item.getDollarPerKilogram().compareTo(new BigDecimal("7500.00")) > 0) {
             result.addErrorMessage("$/Kg must be between 0.00 and 7500.00.");
+        }
+
+        if ((item.getCategory().equals(Category.POISONOUS) || item.getCategory().equals(Category.INEDIBLE))
+            && item.getDollarPerKilogram().compareTo(BigDecimal.ZERO) > 0) {
+            result.addErrorMessage("$/Kg must be $0 for poisonous and inedible items.");
         }
 
         if (!result.isSuccess()) {
@@ -47,3 +60,5 @@ public class ItemService {
         return result;
     }
 }
+
+
