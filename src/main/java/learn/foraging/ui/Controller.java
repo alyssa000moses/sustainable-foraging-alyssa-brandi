@@ -45,7 +45,8 @@ public class Controller {
                     viewByDate();
                     break;
                 case VIEW_FORAGER:
-                    view.displayStatus(false, "NOT IMPLEMENTED");
+//                    view.displayStatus(false, "NOT IMPLEMENTED");
+                    viewForager();
                     break;
                 case VIEW_ITEMS:
                     viewItems();
@@ -110,6 +111,14 @@ public class Controller {
             String successMessage = String.format("Item %s created.", result.getPayload().getId());
             view.displayStatus(true, successMessage);
         }
+    }
+
+    private String viewForager() {
+        view.displayHeader(MainMenuOption.VIEW_FORAGER.getMessage());
+        Forager forager = getForager();
+        view.enterToContinue();
+        return forager.getLastName();
+
     }
 
     // support methods
