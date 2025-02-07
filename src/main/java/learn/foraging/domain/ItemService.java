@@ -31,6 +31,14 @@ public class ItemService {
             result.addErrorMessage("Item name is required.");
         }
 
+        if (repository.findByName(item.getName()).isPresent()) {
+            result.addErrorMessage("Item name must be unique.");
+        }
+
+        if (item.getCategory() == null || item.getCategory().toString().isBlank()) {
+            result.addErrorMessage("Item category is required.");
+        }
+
         if (item.getDollarPerKilogram() == null) {
             result.addErrorMessage("$/Kg is required.");
         } else if (item.getDollarPerKilogram().compareTo(BigDecimal.ZERO) < 0

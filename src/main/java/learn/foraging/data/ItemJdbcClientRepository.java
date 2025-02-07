@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 
 import java.util.List;
+import java.util.Optional;
 
 public class ItemJdbcClientRepository implements ItemRepository {
 
@@ -13,6 +14,19 @@ public class ItemJdbcClientRepository implements ItemRepository {
 
     public ItemJdbcClientRepository(JdbcClient jdbcClient) {
         this.jdbcClient = jdbcClient;
+    }
+
+    @Override
+    public Optional<Item> findByName(String name) {
+        final String sql = """
+                select item_id, `name`, category, dollars_per_kilogram
+                from item
+                where name = ?;
+                """;
+        return jdbcClient.sql(sql)
+                .param(name)
+                .query(new ItemMapper())
+                .optional();
     }
 
     @Override
