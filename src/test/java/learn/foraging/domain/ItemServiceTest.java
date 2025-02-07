@@ -39,6 +39,14 @@ class ItemServiceTest {
     }
 
     @Test
+    void shouldNotAddDuplicateName() {
+        Item arg = new Item(0, "EDIBLE", Category.EDIBLE, new BigDecimal("5.00"));
+        Result<Item> expected = makeResult("Item name must be unique.", null);
+        Result<Item> actual = service.add(arg);
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void shouldNotAddNullDollars() {
         Item arg = new Item(0, "Test Item", Category.EDIBLE, null);
         Result<Item> expected = makeResult("$/Kg is required.", null);
@@ -61,6 +69,18 @@ class ItemServiceTest {
         Result<Item> actual = service.add(arg);
         assertEquals(expected, actual);
     }
+
+    @Test
+    void shouldNotAddEmptyCategory() {
+        Item arg = new Item(0, "Alyssa", null, new BigDecimal("50.00"));
+        Result<Item> expected = makeResult("Item category is required.", null);
+        Result<Item> actual = service.add(arg);
+        assertEquals(expected, actual);
+    }
+
+//            if (item.getCategory() == null || item.getCategory().toString().isBlank()) {
+//        result.addErrorMessage("Item category is required.");
+//    }
 
     @Test
     void shouldAdd() {
