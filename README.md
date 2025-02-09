@@ -35,3 +35,8 @@ Add Item Validations
 - [ ] Attempt to add Poisonous item with cost of $5
 - [ ] See validation that a Poisonous/inedible item must have a cost of $0
 
+Check Reports
+- [ ] View all reports
+- [ ] View Item/Kg Report for 01/01/2023
+- [ ] View Item/Value Report for 01/01/2023
+

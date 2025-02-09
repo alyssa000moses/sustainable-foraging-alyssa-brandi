@@ -8,7 +8,8 @@ public enum MainMenuOption {
     VIEW_ITEMS("View Items"),
     ADD_FORAGE("Add a Forage"),
     ADD_FORAGER("Add a Forager"),
-    ADD_ITEM("Add an Item");
+    ADD_ITEM("Add an Item"),
+    VIEW_REPORTS("View Reports");
 
     private String message;
 
