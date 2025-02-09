@@ -113,13 +113,31 @@ public class Controller {
         }
     }
 
-    private String viewForager() {
+//    view Forager switch case (asks user to choose how to view forager)
+    private void viewForager() {
         view.displayHeader(MainMenuOption.VIEW_FORAGER.getMessage());
-        Forager forager = getForager();
-        view.enterToContinue();
-        return forager.getLastName();
+        switch (view.selectForagerOption()) {
+            case 1:
+                viewForagerByState();
+//                System.out.println("Case1");
+                view.enterToContinue();
+                break;
+            case 2:
+                System.out.println("Case2");
+                view.enterToContinue();
+//                viewForagerByLastName();
+                break;
+            case 3:
+                System.out.println("Case3");
+                view.enterToContinue();
+//                viewForagerById();
+
+                break;
+        }
 
     }
+
+
 
     // support methods
     private Forager getForager() {
@@ -127,6 +145,12 @@ public class Controller {
         List<Forager> foragers = foragerService.findByLastName(lastNamePrefix);
         return view.chooseForager(foragers);
     }
+    private void viewForagerByState() {  // Change return type to void
+        String state = view.getForagerState();
+        List<Forager> foragers = foragerService.findByState(state);
+        view.displayForagers(foragers); // No return needed
+    }
+
 
     private Item getItem() {
         Category category = view.getItemCategory();

@@ -171,4 +171,33 @@ public class View {
     }
 
 
+    public int selectForagerOption() {
+        io.println("1: View Foragers by State");
+        io.println("2: View Foragers by Last Name");
+        io.println("3: View Forager by ID");
+        return io.readInt("Select an option: ", 1, 3);
+    }
+
+    public String getForagerState() {
+
+    return io.readString("Enter the state abbreviation you would like to search for:  ");
+    }
+
+    public Forager displayForagers(List<Forager> foragers) {
+      if (foragers.size() == 0) {
+          io.println("No foragers found");
+      }else {
+        for (Forager forager : foragers) {
+            io.printf("%s %s %s - %s%n",
+                    forager.getId(),
+                    forager.getFirstName(),
+                    forager.getLastName(),
+                    forager.getState()
+            );
+
+        }
+      }
+
+        return null;
+    }
 }
