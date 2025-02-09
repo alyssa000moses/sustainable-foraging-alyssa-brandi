@@ -60,7 +60,7 @@ public class ForagerJdbcClientRepository implements ForagerRepository {
                 where state_abbr = ?;
                 """;
         return jdbcClient.sql(sql)
-                .param(stateAbbr + "%")
+                .param(stateAbbr)
                 .query(new ForagerMapper())
                 .list();
     }
