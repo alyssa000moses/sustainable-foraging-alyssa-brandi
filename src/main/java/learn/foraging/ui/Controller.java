@@ -61,6 +61,10 @@ public class Controller {
                 case ADD_ITEM:
                     addItem();
                     break;
+                case VIEW_REPORTS:
+                    viewReports();
+                    break;
+
             }
         } while (option != MainMenuOption.EXIT);
     }
@@ -135,6 +139,20 @@ public class Controller {
                 break;
         }
 
+    }
+
+    private void viewReports() {
+        view.displayHeader(MainMenuOption.VIEW_REPORTS.getMessage());
+        switch (view.selectReportOption()) {
+            case 1:
+                view.displayDayKgReport(forageService.reportOfItemAndKgForGivenDay(view.getForageDate()));
+                view.enterToContinue();
+                break;
+            case 2:
+                view.displayDayValueReport(forageService.reportOfItemAndValueForGivenDay(view.getForageDate()));
+                view.enterToContinue();
+                break;
+        }
     }
 
 

@@ -8,6 +8,7 @@ import learn.foraging.models.Item;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class View {
@@ -199,5 +200,44 @@ public class View {
       }
 
         return null;
+    }
+
+    // implement selectReportOption() method
+    public int selectReportOption() {
+        io.println("1: Report of Item and Kilograms for Given Day");
+        io.println("2: Report of Item and Value for Given Day");
+        return io.readInt("Select an option: ", 1, 2);
+    }
+
+    public void displayDayValueReport(Map<String, BigDecimal> report) {
+        displayHeader("Report of Item and Value for Given Day");
+        if (report.isEmpty()) {
+            io.println("No forages found");
+        }else {
+                for (var reportRow : report.entrySet()) {
+
+                    io.printf("%s $%s %n",
+                            reportRow.getKey(),
+                            reportRow.getValue()
+                    );
+
+            }
+        }
+
+    }
+
+    public void displayDayKgReport(Map<String, BigDecimal> report) {
+        displayHeader("Report of Item and Kilograms for Given Day");
+        if (report.isEmpty()) {
+            io.println("No forages found");
+        }else {
+            for (var reportRow : report.entrySet()) {
+
+                io.printf("%s %s kgs%n",
+                        reportRow.getKey(),
+                        reportRow.getValue()
+                );
+            }
+        }
     }
 }
