@@ -6,8 +6,11 @@ import learn.foraging.data.ItemRepository;
 import learn.foraging.models.Forage;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ForageService {
 
@@ -106,5 +109,37 @@ public class ForageService {
         if (itemRepository.findById(forage.getItem().getId()) == null) {
             result.addErrorMessage("Item does not exist.");
         }
+    }
+
+    public Map<String, BigDecimal> reportOfItemAndKgForGivenDay(LocalDate date) {
+        List<Forage> allForageOnDate = findByDate(date);
+
+       return allForageOnDate.stream()
+               .collect(Collectors.groupingBy(
+                       forage -> forage.getItem().getName(),
+                       Collectors.reducing(
+                               BigDecimal.ZERO,
+                               Forage::getKilograms,
+                               BigDecimal::add
+                       )
+               ));
+    }
+
+    public Map<String, BigDecimal> reportOfItemAndValueForGivenDay(LocalDate date) {
+        List<Forage> allForageOnDate = findByDate(date);
+
+        return allForageOnDate.stream()
+                .filter(forage -> forage.getItem() != null
+                        && forage.getItem().getDollarPerKilogram() != null
+                        && forage.getKilograms() != null) // Ensure no null values
+                .collect(Collectors.groupingBy(
+                        forage -> forage.getItem().getName(),
+                        Collectors.reducing(
+                                BigDecimal.ZERO, // Initial value
+                                forage -> forage.getKilograms().multiply(forage.getItem().getDollarPerKilogram())// Multiplication
+                                        .setScale(2, RoundingMode.HALF_UP), //BigDecimal scale rounding
+                                BigDecimal::add // Sum up the values
+                        )
+                ));
     }
 }

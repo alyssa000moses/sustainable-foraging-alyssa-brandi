@@ -23,7 +23,8 @@ public class ForageRepositoryDouble implements ForageRepository {
             return List.of(
                     new Forage(1, JAN_01_2023, FORAGER_ONE, EDIBLE, ONE_KILO),
                     new Forage(3, JAN_01_2023, FORAGER_ONE, INEDIBLE, ONE_KILO),
-                    new Forage(2, JAN_01_2023, FORAGER_TWO, MEDICINAL, ONE_KILO)
+                    new Forage(2, JAN_01_2023, FORAGER_TWO, MEDICINAL, ONE_KILO),
+                    new Forage(4, JAN_01_2023, FORAGER_ONE, EDIBLE, ONE_KILO)
             );
         }
         return List.of();

@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Map;
 
 import static learn.foraging.TestData.*;
 import static learn.foraging.TestHelper.makeResult;
@@ -100,5 +101,47 @@ class ForageServiceTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+void reportOfItemAndValueForGivenDay_shouldReturnCorrectValues() {
+    LocalDate date = JAN_01_2023;
+    Map<String, BigDecimal> report = service.reportOfItemAndValueForGivenDay(date);
+
+    assertEquals(new BigDecimal("10.00"), report.get("EDIBLE"));
+    // Add more assertions if needed based on the test data
+}
+
+@Test
+void reportOfItemAndValueForGivenDay_shouldHandleEmptyList() {
+    LocalDate date = LocalDate.of(2025, 1, 1); // Assuming no forages on this date
+    Map<String, BigDecimal> report = service.reportOfItemAndValueForGivenDay(date);
+
+    assertEquals(0, report.size());
+}
+
+@Test
+void reportOfItemAndValueForGivenDay_shouldHandleNullValues() {
+    LocalDate date = JAN_01_2023; // Assuming some forages with null values on this date
+    Map<String, BigDecimal> report = service.reportOfItemAndValueForGivenDay(date);
+
+    assertEquals(new BigDecimal("10.00"), report.get("EDIBLE"));
+    // Add more assertions if needed based on the test data
+}
+
+    @Test
+    void reportOfItemAndKgForGivenDay_shouldReturnCorrectValues() {
+        LocalDate date = JAN_01_2023;
+        Map<String, BigDecimal> report = service.reportOfItemAndKgForGivenDay(date);
+
+        assertEquals(new BigDecimal("2.00"), report.get("EDIBLE"));
+        // Add more assertions if needed based on the test data
+    }
+
+    @Test
+    void reportOfItemAndKgForGivenDay_shouldHandleEmptyList() {
+        LocalDate date = LocalDate.of(2025, 1, 1); // Assuming no forages on this date
+        Map<String, BigDecimal> report = service.reportOfItemAndKgForGivenDay(date);
+
+        assertEquals(0, report.size());
+    }
 
 }
