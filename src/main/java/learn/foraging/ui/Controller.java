@@ -46,7 +46,7 @@ public class Controller {
                     break;
                 case VIEW_FORAGER:
 //
-                    viewForager();
+                    viewForagerByState();
                     break;
                 case VIEW_ITEMS:
                     viewItems();

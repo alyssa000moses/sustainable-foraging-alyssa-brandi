@@ -29,10 +29,10 @@ public class ForagerJdbcClientRepository implements ForagerRepository {
 //        }
 
         final String sql = """
-            select forager_id, first_name, last_name, state_abbr
-            from forager
-            where forager_id = ?;
-            """;
+                select forager_id, first_name, last_name, state_abbr
+                from forager
+                where forager_id = ?;
+                """;
 
         return jdbcClient.sql(sql)
                 .param(forager_id)
@@ -66,9 +66,7 @@ public class ForagerJdbcClientRepository implements ForagerRepository {
                 .list();
     }
 
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
+
     //        public Forager mapRow(ResultSet rs, int rowNum) throws SQLException {
 //            Forager forager = new Forager();
 //            forager.setId(rs.getInt("forager_id"));
@@ -77,61 +75,27 @@ public class ForagerJdbcClientRepository implements ForagerRepository {
 //            forager.setState(rs.getString("state_abbr"));
 //            return forager;
 //        }
+
+
     @Override
     public Forager add(Forager forager) {
->>>>>>> Stashed changes
-
-    public Forager add(Forager forager) {
         final String sql = """
-<<<<<<< Updated upstream
-            INSERT INTO forager (first_name, last_name, state_abbr)
-            VALUES (?, ?, ?);
-            """;
-=======
-                insert into forager (first_name, last_name, state_abbr)
-                values (:first_name, :last_name, :state_abbr);
+                
+                INSERT INTO forager (first_name, last_name, state_abbr)
+                VALUES (?, ?, ?);
                 """;
-=======
 
-    public Forager add(Forager forager) {
-        final String sql = """
-            INSERT INTO forager (first_name, last_name, state_abbr)
-            VALUES (?, ?, ?);
-            """;
->>>>>>> a152898 (add new forager complete)
->>>>>>> Stashed changes
 
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
 
         jdbcClient.sql(sql)
-<<<<<<< Updated upstream
-                .param(forager.getFirstName())
-                .param(forager.getLastName())
-                .param(forager.getState())
-                .update(keyHolder);
-=======
-<<<<<<< HEAD
+
+
                 .param("first_name", forager.getFirstName())
                 .param("last_name", forager.getLastName())
                 .param("state_abbr", forager.getState())
                 .update(keyHolder, "forager_id");
->>>>>>> Stashed changes
 
-        if (keyHolder.getKey() != null) {
-            forager.setId(keyHolder.getKey().intValue());
-        }
-
-        return forager;
-    }
-<<<<<<< Updated upstream
-
-
-=======
-=======
-                .param(forager.getFirstName())
-                .param(forager.getLastName())
-                .param(forager.getState())
-                .update(keyHolder);
 
         if (keyHolder.getKey() != null) {
             forager.setId(keyHolder.getKey().intValue());
@@ -141,6 +105,4 @@ public class ForagerJdbcClientRepository implements ForagerRepository {
     }
 
 
->>>>>>> a152898 (add new forager complete)
->>>>>>> Stashed changes
 }
