@@ -1,19 +1,9 @@
 
 Instructions 
 
-- Make a README.md in the root of your project, and document all work you do in it
-    - Think about documentation in terms of proving what you've done to the client
-  
-- Go through the working features and try to break them
-    - Test each domain rule that applies (Requirements section in teachable)
-        - Test suite
-        - Manual QA
-    - Fix any issues you find with the working features
-    - Write tests that fail in the bugged state, and pass once you fix them
+The Foraging App is a simple application that allows users to track items they have foraged. The app has a simple domain model with Foragers and Items. Items have a name, category, and cost. Forages have the name of the Forager and a list of items they have foraged.
 
-- Implement the incomplete features
-    - Follow all Requirements
-    - Test all method outcomes that you add to repos and domains
+The app has a simple menu system that allows users to add items, add foragers, and add forages. The app also has reporting system that allows users to view reports of items foraged by date.
 
 - Reports
     - Listed as Stretch Goals in Teachable, but you should complete at least 2 reports of your choice

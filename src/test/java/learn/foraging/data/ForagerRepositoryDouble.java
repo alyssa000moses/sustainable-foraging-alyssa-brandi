@@ -36,6 +36,17 @@ public class ForagerRepositoryDouble implements ForagerRepository {
                 .collect(Collectors.toList());
     }
 
+
+    @Override
+    public Forager add(Forager forager) {
+        forager.setId(foragers.stream()
+                .mapToInt(Forager::getId)
+                .max()
+                .orElse(0) + 1);
+        foragers.add(forager);
+        return forager;
+    }
+
     private static Forager makeForager() {
         Forager forager = new Forager();
         forager.setId(1);
