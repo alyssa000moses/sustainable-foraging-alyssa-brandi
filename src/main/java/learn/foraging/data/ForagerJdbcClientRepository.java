@@ -66,16 +66,68 @@ public class ForagerJdbcClientRepository implements ForagerRepository {
                 .list();
     }
 
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+    //        public Forager mapRow(ResultSet rs, int rowNum) throws SQLException {
+//            Forager forager = new Forager();
+//            forager.setId(rs.getInt("forager_id"));
+//            forager.setFirstName(rs.getString("first_name"));
+//            forager.setLastName(rs.getString("last_name"));
+//            forager.setState(rs.getString("state_abbr"));
+//            return forager;
+//        }
+    @Override
+    public Forager add(Forager forager) {
+>>>>>>> Stashed changes
+
+    public Forager add(Forager forager) {
+        final String sql = """
+<<<<<<< Updated upstream
+            INSERT INTO forager (first_name, last_name, state_abbr)
+            VALUES (?, ?, ?);
+            """;
+=======
+                insert into forager (first_name, last_name, state_abbr)
+                values (:first_name, :last_name, :state_abbr);
+                """;
+=======
 
     public Forager add(Forager forager) {
         final String sql = """
             INSERT INTO forager (first_name, last_name, state_abbr)
             VALUES (?, ?, ?);
             """;
+>>>>>>> a152898 (add new forager complete)
+>>>>>>> Stashed changes
 
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
 
         jdbcClient.sql(sql)
+<<<<<<< Updated upstream
+                .param(forager.getFirstName())
+                .param(forager.getLastName())
+                .param(forager.getState())
+                .update(keyHolder);
+=======
+<<<<<<< HEAD
+                .param("first_name", forager.getFirstName())
+                .param("last_name", forager.getLastName())
+                .param("state_abbr", forager.getState())
+                .update(keyHolder, "forager_id");
+>>>>>>> Stashed changes
+
+        if (keyHolder.getKey() != null) {
+            forager.setId(keyHolder.getKey().intValue());
+        }
+
+        return forager;
+    }
+<<<<<<< Updated upstream
+
+
+=======
+=======
                 .param(forager.getFirstName())
                 .param(forager.getLastName())
                 .param(forager.getState())
@@ -89,4 +141,6 @@ public class ForagerJdbcClientRepository implements ForagerRepository {
     }
 
 
+>>>>>>> a152898 (add new forager complete)
+>>>>>>> Stashed changes
 }
