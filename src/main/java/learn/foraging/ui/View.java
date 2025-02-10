@@ -209,6 +209,14 @@ public class View {
         return io.readInt("Select an option: ", 1, 2);
     }
 
+    public Forager addNewForager() {
+        String firstName = io.readString("Enter first name: ");
+        String lastName = io.readString("Enter last name: ");
+        String state = io.readString("Enter state abbreviation: ");
+
+        return new Forager(0, firstName, lastName, state);
+    }
+
     public void displayDayValueReport(Map<String, BigDecimal> report) {
         displayHeader("Report of Item and Value for Given Day");
         if (report.isEmpty()) {

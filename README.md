@@ -1,4 +1,4 @@
-bug-fix-view-items
+
 Instructions 
 
 - Make a README.md in the root of your project, and document all work you do in it
@@ -25,7 +25,6 @@ Instructions
     - After the 2 non-stretch reports, prioritize 1-2 CRUD stretch goals of your choice
     - Delete an Item / Delete a Forager are most challenging but most rewarding
 
-Hey Alyssa, here's my edit! 
 
 Add Item Validations
 - [ ] Attempt to add Edible item Parsley

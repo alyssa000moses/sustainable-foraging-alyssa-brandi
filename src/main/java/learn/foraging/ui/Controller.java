@@ -45,7 +45,7 @@ public class Controller {
                     viewByDate();
                     break;
                 case VIEW_FORAGER:
-//                    view.displayStatus(false, "NOT IMPLEMENTED");
+//
                     viewForager();
                     break;
                 case VIEW_ITEMS:
@@ -55,7 +55,8 @@ public class Controller {
                     addForage();
                     break;
                 case ADD_FORAGER:
-                    view.displayStatus(false, "NOT IMPLEMENTED");
+//                    view.displayStatus(false, "NOT IMPLEMENTED");
+                    addForager();
                     view.enterToContinue();
                     break;
                 case ADD_ITEM:
@@ -117,7 +118,23 @@ public class Controller {
         }
     }
 
-//    view Forager switch case (asks user to choose how to view forager)
+//    add forager
+    private void addForager() {
+        view.displayHeader(MainMenuOption.ADD_FORAGER.getMessage());
+        Forager forager = view.addNewForager();
+        Result<Forager> result = foragerService.add(forager);
+        if (!result.isSuccess()) {
+            view.displayStatus(false, result.getErrorMessages());
+        } else {
+            String successMessage = String.format("Forager %s created.", result.getPayload().getId());
+            view.displayStatus(true, successMessage);
+        }
+    }
+
+
+
+
+    //    view Forager switch case (asks user to choose how to view forager)
     private void viewForager() {
         view.displayHeader(MainMenuOption.VIEW_FORAGER.getMessage());
         switch (view.selectForagerOption()) {
