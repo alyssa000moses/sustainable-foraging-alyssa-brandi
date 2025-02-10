@@ -43,4 +43,14 @@ class ForagerJdbcClientRepositoryTest {
         List<Forager> actual = repository.findByState("MN");
         assertEquals(expected, actual);
     }
+
+    @Test
+    void addForager() {
+        Forager forager = new Forager();
+        forager.setFirstName("Test");
+        forager.setLastName("Test");
+        forager.setState("MN");
+        Forager actual = repository.add(forager);
+        assertEquals(3, actual.getId());
+    }
 }

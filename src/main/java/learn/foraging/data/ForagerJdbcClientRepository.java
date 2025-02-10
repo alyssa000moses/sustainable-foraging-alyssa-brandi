@@ -2,6 +2,7 @@ package learn.foraging.data;
 
 import learn.foraging.models.Forager;
 import org.springframework.jdbc.core.simple.JdbcClient;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -64,4 +65,28 @@ public class ForagerJdbcClientRepository implements ForagerRepository {
                 .query(new ForagerMapper())
                 .list();
     }
+
+
+    public Forager add(Forager forager) {
+        final String sql = """
+            INSERT INTO forager (first_name, last_name, state_abbr)
+            VALUES (?, ?, ?);
+            """;
+
+        GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
+
+        jdbcClient.sql(sql)
+                .param(forager.getFirstName())
+                .param(forager.getLastName())
+                .param(forager.getState())
+                .update(keyHolder);
+
+        if (keyHolder.getKey() != null) {
+            forager.setId(keyHolder.getKey().intValue());
+        }
+
+        return forager;
+    }
+
+
 }
