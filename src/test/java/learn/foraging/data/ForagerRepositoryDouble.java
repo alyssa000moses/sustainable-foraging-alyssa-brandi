@@ -36,6 +36,7 @@ public class ForagerRepositoryDouble implements ForagerRepository {
                 .collect(Collectors.toList());
     }
 
+
     @Override
     public Forager add(Forager forager) {
         forager.setId(foragers.stream()

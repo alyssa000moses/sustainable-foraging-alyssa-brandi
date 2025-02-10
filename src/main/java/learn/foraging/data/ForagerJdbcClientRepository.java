@@ -76,26 +76,19 @@ public class ForagerJdbcClientRepository implements ForagerRepository {
 //            return forager;
 //        }
 
-
-    @Override
     public Forager add(Forager forager) {
         final String sql = """
-                
-                INSERT INTO forager (first_name, last_name, state_abbr)
-                VALUES (?, ?, ?);
-                """;
-
+            INSERT INTO forager (first_name, last_name, state_abbr)
+            VALUES (?, ?, ?);
+            """;
 
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
 
         jdbcClient.sql(sql)
-
-
-                .param("first_name", forager.getFirstName())
-                .param("last_name", forager.getLastName())
-                .param("state_abbr", forager.getState())
-                .update(keyHolder, "forager_id");
-
+                .param(forager.getFirstName())
+                .param(forager.getLastName())
+                .param(forager.getState())
+                .update(keyHolder);
 
         if (keyHolder.getKey() != null) {
             forager.setId(keyHolder.getKey().intValue());
